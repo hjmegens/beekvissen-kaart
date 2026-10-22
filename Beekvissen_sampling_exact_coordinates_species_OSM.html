@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a369da833bac8ddaa168f04813ad2f6b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_a369da833bac8ddaa168f04813ad2f6b" ></div>
+        
+    
+    <div style="position: fixed;
+         top: 12px; left: 50px; width: 300px; z-index:9999;
+         background-color: white; border:2px solid #444; border-radius:8px;
+         padding: 12px 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+         font-family: Arial, sans-serif; font-size: 14px;">
+      <div style="font-size: 16px; font-weight: 700; line-height: 1.1; margin-bottom: 8px;">
+        Samplinglocaties beekvissen
+      </div>
+      <div>
+        <span style="display:inline-block; width:14px; height:14px; border-radius:50%;
+                     background:#2b6cb0; border:1px solid #111; margin-right:8px;"></span>
+        Rivierprik <i>(Lampetra fluviatilis)</i>
+      </div>
+      <div>
+        <span style="display:inline-block; width:14px; height:14px; border-radius:50%;
+                     background:#d73027; border:1px solid #111; margin-right:8px;"></span>
+        Beekprik <i>(Lampetra planeri)</i>
+      </div>
+      <div>
+        <span style="display:inline-block; width:14px; height:14px; border-radius:50%;
+                     background:#d39b00; border:1px solid #111; margin-right:8px;"></span>
+        Serpeling <i>(Leuciscus leuciscus)</i>
+      </div>
+      <div>
+        <span style="display:inline-block; width:14px; height:14px; border-radius:50%;
+                     background:#2ca25f; border:1px solid #111; margin-right:8px;"></span>
+        Donderpad <i>(Cottus perifretum)</i>
+      </div>
+      <div style="margin-top:10px; font-size:12px; color:#333;">
+        Markergrootte = aantal samples van dezelfde soort op exact hetzelfde coördinaat.<br>
+        Klik op een marker voor details.
+      </div>
+    </div>
+    
+</body>
+<script>
+    
+    
+            var map_a369da833bac8ddaa168f04813ad2f6b = L.map(
+                "map_a369da833bac8ddaa168f04813ad2f6b",
+                {
+                    center: [52.445061885714274, 6.7409582000000015],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 8,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+
+            
+
+        
+    
+            var tile_layer_c1e47d5ccc9d8852b51543fcdb457f9b = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_c1e47d5ccc9d8852b51543fcdb457f9b.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            var feature_group_283debe7cad707008c8f6893a16d2fec = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_7294a1cf2ea823fc46354d754357fede = L.circleMarker(
+                [52.45292, 6.07835],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b6cb0", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_283debe7cad707008c8f6893a16d2fec);
+        
+    
+        var popup_4528fb63bfff24a998781cd4d48811e6 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_204ec9c16ef5cde38d8f9df97741e25b = $(`<div id="html_204ec9c16ef5cde38d8f9df97741e25b" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra fluviatilis</i><br>         <b>n:</b> 35<br>         <b>Coördinaat:</b> 52.452920, 6.078350<br>         <b>Werkblad(en):</b> Lampetra2025; Lampetra2026<br>         <b>Sample-ID's:</b> A001; A002; A003; A004; A005; A006; A007; A008; A009; A010; A011; A012; A013; A014; A015; A016; A017; A018; A019; A020; A021; A022; A023; A024; A025; A026; A027; A028; B001; B002; B003; B004; B005; B006; B025<br>         <b>Seq_id:</b> B001; B002; B003; B004; B005; B006; B025; LF10; LF11B; LF12; LF13; LF14B; LF15; LF16B; LF17B; LF18B; LF19B; LF1C; LF2; LF20B; LF21B; LF22B; LF23B; LF24; LF25; LF26; LF27B; LF3; LF4B; LF5B; LF6; LF7B; LF8; LF9; Prik1<br>         <b>Locatie(s):</b> Stuw bij Hattem<br>         <b>Gemeente(n):</b> Hattem         </div>`)[0];
+                popup_4528fb63bfff24a998781cd4d48811e6.setContent(html_204ec9c16ef5cde38d8f9df97741e25b);
+            
+        
+
+        circle_marker_7294a1cf2ea823fc46354d754357fede.bindPopup(popup_4528fb63bfff24a998781cd4d48811e6)
+        ;
+
+        
+    
+    
+            circle_marker_7294a1cf2ea823fc46354d754357fede.bindTooltip(
+                `<div>
+                     Rivierprik (Lampetra fluviatilis) | n=35 | 52.45292, 6.07835
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4d9659ff4ab81312c0863c64a6f8abfd = L.circleMarker(
+                [60.553241, 26.850269],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b6cb0", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_283debe7cad707008c8f6893a16d2fec);
+        
+    
+        var popup_ed60907205d83fea734bd472ef473f1a = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_05a607a97d4abb7f24162ff6604371f1 = $(`<div id="html_05a607a97d4abb7f24162ff6604371f1" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra fluviatilis</i><br>         <b>n:</b> 12<br>         <b>Coördinaat:</b> 60.553241, 26.850269<br>         <b>Werkblad(en):</b> Lampetra2025; Lampetra2026<br>         <b>Sample-ID's:</b> FIN10; FIN11; FIN12; FIN5; FIN6; FIN7; FIN8; FIN9; LF28_Finland; LF29_Finland; LF30_Finland; LF31_Finland<br>         <b>Seq_id:</b> FIN10; FIN11; FIN12; FIN5; FIN6; FIN7; FIN8; FIN9; LF28_Finland; LF29_Finland; LF30_Finland; LF31_Finland<br>         <b>Locatie(s):</b> Kymijoki river<br>         <b>Gemeente(n):</b> Kymenlaakso         </div>`)[0];
+                popup_ed60907205d83fea734bd472ef473f1a.setContent(html_05a607a97d4abb7f24162ff6604371f1);
+            
+        
+
+        circle_marker_4d9659ff4ab81312c0863c64a6f8abfd.bindPopup(popup_ed60907205d83fea734bd472ef473f1a)
+        ;
+
+        
+    
+    
+            circle_marker_4d9659ff4ab81312c0863c64a6f8abfd.bindTooltip(
+                `<div>
+                     Rivierprik (Lampetra fluviatilis) | n=12 | 60.55324, 26.85027
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6de6b2a7762792ea8f086f6d0a6e0e1d = L.circleMarker(
+                [53.07934, 5.331642],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b6cb0", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_283debe7cad707008c8f6893a16d2fec);
+        
+    
+        var popup_d8ddf48ded59917aaa24e7451ad7b2f1 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_fe5160088e3372e9ff7e39919e918661 = $(`<div id="html_fe5160088e3372e9ff7e39919e918661" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra fluviatilis</i><br>         <b>n:</b> 7<br>         <b>Coördinaat:</b> 53.079340, 5.331642<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A647; A648; A649; A688; A689; A698; A699<br>         <b>Seq_id:</b> A647; A648; A649; A688; A689; A698; A699<br>         <b>Locatie(s):</b> Kornwerderzand<br>         <b>Gemeente(n):</b> Kornwerderzand         </div>`)[0];
+                popup_d8ddf48ded59917aaa24e7451ad7b2f1.setContent(html_fe5160088e3372e9ff7e39919e918661);
+            
+        
+
+        circle_marker_6de6b2a7762792ea8f086f6d0a6e0e1d.bindPopup(popup_d8ddf48ded59917aaa24e7451ad7b2f1)
+        ;
+
+        
+    
+    
+            circle_marker_6de6b2a7762792ea8f086f6d0a6e0e1d.bindTooltip(
+                `<div>
+                     Rivierprik (Lampetra fluviatilis) | n=7 | 53.07934, 5.33164
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_85dab7a64389982f0e41fa0e43d3bc55 = L.circleMarker(
+                [51.996605, 5.130086],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b6cb0", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.8, "stroke": true, "weight": 1}
+            ).addTo(feature_group_283debe7cad707008c8f6893a16d2fec);
+        
+    
+        var popup_ff8ea0c694a431a434cd930e34db237d = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_be5989fa2134d395b5e16f0cb302c191 = $(`<div id="html_be5989fa2134d395b5e16f0cb302c191" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra fluviatilis</i><br>         <b>n:</b> 4<br>         <b>Coördinaat:</b> 51.996605, 5.130086<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> 2025NJ10NL; 2025NJ5NL; 2025NJ6NL; 2025NJ9NL<br>         <b>Seq_id:</b> 2025NJ10NL; 2025NJ5NL; 2025NJ6NL; 2025NJ9NL<br>         <b>Locatie(s):</b> Hagestein benedenstrooms<br>         <b>Gemeente(n):</b> Hagestein         </div>`)[0];
+                popup_ff8ea0c694a431a434cd930e34db237d.setContent(html_be5989fa2134d395b5e16f0cb302c191);
+            
+        
+
+        circle_marker_85dab7a64389982f0e41fa0e43d3bc55.bindPopup(popup_ff8ea0c694a431a434cd930e34db237d)
+        ;
+
+        
+    
+    
+            circle_marker_85dab7a64389982f0e41fa0e43d3bc55.bindTooltip(
+                `<div>
+                     Rivierprik (Lampetra fluviatilis) | n=4 | 51.99661, 5.13009
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_613a7c901d8878e481719c42546f4b99 = L.circleMarker(
+                [52.36895, 6.0368],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2b6cb0", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.2, "stroke": true, "weight": 1}
+            ).addTo(feature_group_283debe7cad707008c8f6893a16d2fec);
+        
+    
+        var popup_6e4b19288eebbc0cb602433c2f642386 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_2168586c051102671ed8d061fa119bf5 = $(`<div id="html_2168586c051102671ed8d061fa119bf5" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra fluviatilis</i><br>         <b>n:</b> 1<br>         <b>Coördinaat:</b> 52.368950, 6.036800<br>         <b>Werkblad(en):</b> Lampetra2025<br>         <b>Sample-ID's:</b> A082<br>         <b>Seq_id:</b> A082<br>         <b>Locatie(s):</b> Horsthoekerbeek (Noord)<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_6e4b19288eebbc0cb602433c2f642386.setContent(html_2168586c051102671ed8d061fa119bf5);
+            
+        
+
+        circle_marker_613a7c901d8878e481719c42546f4b99.bindPopup(popup_6e4b19288eebbc0cb602433c2f642386)
+        ;
+
+        
+    
+    
+            circle_marker_613a7c901d8878e481719c42546f4b99.bindTooltip(
+                `<div>
+                     Rivierprik (Lampetra fluviatilis) | n=1 | 52.36895, 6.03680
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_283debe7cad707008c8f6893a16d2fec.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            var feature_group_bb33df4a70f5549570741c1459bc0272 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_5ddea40bd2790d2e89538e85619dd536 = L.circleMarker(
+                [52.17698, 5.92101],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 18.2, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_2c8e15aff343305347fc66646d4d454d = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_f21c89e5d5a41cb785d48d8f899d6627 = $(`<div id="html_f21c89e5d5a41cb785d48d8f899d6627" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 11<br>         <b>Coördinaat:</b> 52.176980, 5.921010<br>         <b>Werkblad(en):</b> Lampetra2025<br>         <b>Sample-ID's:</b> A031; A032; A033; A034; A035; A036; A037; A038; A039; A040; A041<br>         <b>Seq_id:</b> LP31; LP32; LP33; LP34; LP35; LP36; LP37; LP38; LP39; LP40; LP41<br>         <b>Locatie(s):</b> Koppelsprengen, Casimirlaan<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_2c8e15aff343305347fc66646d4d454d.setContent(html_f21c89e5d5a41cb785d48d8f899d6627);
+            
+        
+
+        circle_marker_5ddea40bd2790d2e89538e85619dd536.bindPopup(popup_2c8e15aff343305347fc66646d4d454d)
+        ;
+
+        
+    
+    
+            circle_marker_5ddea40bd2790d2e89538e85619dd536.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=11 | 52.17698, 5.92101
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_afb2f33946464c8531c66c45d7ef1ed1 = L.circleMarker(
+                [51.94326, 6.77057],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_cb82ad2f610ba17ad32401a4a783105b = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_d15058b64515303e323b31269a4a4242 = $(`<div id="html_d15058b64515303e323b31269a4a4242" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 10<br>         <b>Coördinaat:</b> 51.943260, 6.770570<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A385; A386; A387; A388; A389; A390; A391; A392; A393; A394<br>         <b>Seq_id:</b> A385; A386; A387; A388; A389; A390; A391; A392; A393; A394<br>         <b>Locatie(s):</b> Bemersbeek<br>         <b>Gemeente(n):</b> Kotten         </div>`)[0];
+                popup_cb82ad2f610ba17ad32401a4a783105b.setContent(html_d15058b64515303e323b31269a4a4242);
+            
+        
+
+        circle_marker_afb2f33946464c8531c66c45d7ef1ed1.bindPopup(popup_cb82ad2f610ba17ad32401a4a783105b)
+        ;
+
+        
+    
+    
+            circle_marker_afb2f33946464c8531c66c45d7ef1ed1.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=10 | 51.94326, 6.77057
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_93c7af9617e241b59944f2e706f03f07 = L.circleMarker(
+                [51.98341, 6.74751],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_185882eb1127f7c5fd8974a4bb073b3b = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_8df877020f747a104c684d52c5150b15 = $(`<div id="html_8df877020f747a104c684d52c5150b15" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 10<br>         <b>Coördinaat:</b> 51.983410, 6.747510<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A299; A300; A362; A363; A364; A365; A366; A367; A368; A369<br>         <b>Seq_id:</b> A299; A300; A362; A363; A364; A365; A366; A367; A368; A369<br>         <b>Locatie(s):</b> Willinkbeek<br>         <b>Gemeente(n):</b> Winterswijk         </div>`)[0];
+                popup_185882eb1127f7c5fd8974a4bb073b3b.setContent(html_8df877020f747a104c684d52c5150b15);
+            
+        
+
+        circle_marker_93c7af9617e241b59944f2e706f03f07.bindPopup(popup_185882eb1127f7c5fd8974a4bb073b3b)
+        ;
+
+        
+    
+    
+            circle_marker_93c7af9617e241b59944f2e706f03f07.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=10 | 51.98341, 6.74751
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3d0ee3aeb63db5fddeff12bf0f41e665 = L.circleMarker(
+                [52.00675, 6.66995],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_75de63d0071c59102c0fdc2e9f6c46a4 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_3897ed517c936bc71a9291de36a9a758 = $(`<div id="html_3897ed517c936bc71a9291de36a9a758" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 10<br>         <b>Coördinaat:</b> 52.006750, 6.669950<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A283; A284; A285; A286; A287; A288; A289; A290; A291; A292<br>         <b>Seq_id:</b> A283; A284; A285; A286; A287; A288; A289; A290; A291; A292<br>         <b>Locatie(s):</b> Bypass Groenlose Slinge<br>         <b>Gemeente(n):</b> Winterswijk         </div>`)[0];
+                popup_75de63d0071c59102c0fdc2e9f6c46a4.setContent(html_3897ed517c936bc71a9291de36a9a758);
+            
+        
+
+        circle_marker_3d0ee3aeb63db5fddeff12bf0f41e665.bindPopup(popup_75de63d0071c59102c0fdc2e9f6c46a4)
+        ;
+
+        
+    
+    
+            circle_marker_3d0ee3aeb63db5fddeff12bf0f41e665.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=10 | 52.00675, 6.66995
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3afcbc6916a6d59bf9a1cbfa625377c8 = L.circleMarker(
+                [52.1813, 5.92752],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_b96d86071cb38863043fdc737e498754 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_80d89fe8e9a61c129dd35bfbb0ad20f1 = $(`<div id="html_80d89fe8e9a61c129dd35bfbb0ad20f1" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 10<br>         <b>Coördinaat:</b> 52.181300, 5.927520<br>         <b>Werkblad(en):</b> Lampetra2025<br>         <b>Sample-ID's:</b> A043; A044; A045; A046; A047; A048; A049; A050; A051; A052<br>         <b>Seq_id:</b> A043; A044; A045; A046; A047; A048; A049; A050; A051; A052<br>         <b>Locatie(s):</b> Ugchelse beek<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_b96d86071cb38863043fdc737e498754.setContent(html_80d89fe8e9a61c129dd35bfbb0ad20f1);
+            
+        
+
+        circle_marker_3afcbc6916a6d59bf9a1cbfa625377c8.bindPopup(popup_b96d86071cb38863043fdc737e498754)
+        ;
+
+        
+    
+    
+            circle_marker_3afcbc6916a6d59bf9a1cbfa625377c8.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=10 | 52.18130, 5.92752
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_42adfbd16860bf88c6caf12b49540f18 = L.circleMarker(
+                [52.27674, 5.95817],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_4835a1b0352cb0042f2fa954a82d5181 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_e66193e0cf9b898cd663c3d3631a1b24 = $(`<div id="html_e66193e0cf9b898cd663c3d3631a1b24" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 10<br>         <b>Coördinaat:</b> 52.276740, 5.958170<br>         <b>Werkblad(en):</b> Lampetra2025<br>         <b>Sample-ID's:</b> A053; A054; A055; A056; A057; A058; A059; A060; A061; A062<br>         <b>Seq_id:</b> A053; A054; A055; A056; A057; A058; A059; A060; A061; A062<br>         <b>Locatie(s):</b> Egelbeek<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_4835a1b0352cb0042f2fa954a82d5181.setContent(html_e66193e0cf9b898cd663c3d3631a1b24);
+            
+        
+
+        circle_marker_42adfbd16860bf88c6caf12b49540f18.bindPopup(popup_4835a1b0352cb0042f2fa954a82d5181)
+        ;
+
+        
+    
+    
+            circle_marker_42adfbd16860bf88c6caf12b49540f18.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=10 | 52.27674, 5.95817
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8198831412f7e498f7b9e3747cef58ba = L.circleMarker(
+                [52.30607, 5.9982],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_dcf02b4a0288e1b0f38811856ee99882 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_c83f691d4c24493840eece2752152b61 = $(`<div id="html_c83f691d4c24493840eece2752152b61" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 10<br>         <b>Coördinaat:</b> 52.306070, 5.998200<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A223; A224; A225; A226; A227; A228; A229; A230; A231; A232<br>         <b>Seq_id:</b> A223; A224; A225; A226; A227; A228; A229; A230; A231; A232<br>         <b>Locatie(s):</b> Viskwekerijweg<br>         <b>Gemeente(n):</b> Emst         </div>`)[0];
+                popup_dcf02b4a0288e1b0f38811856ee99882.setContent(html_c83f691d4c24493840eece2752152b61);
+            
+        
+
+        circle_marker_8198831412f7e498f7b9e3747cef58ba.bindPopup(popup_dcf02b4a0288e1b0f38811856ee99882)
+        ;
+
+        
+    
+    
+            circle_marker_8198831412f7e498f7b9e3747cef58ba.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=10 | 52.30607, 5.99820
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0f7bcd3e7a33781abb5e5bb8d95b7280 = L.circleMarker(
+                [52.30848, 5.97962],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_ae3df8bc82a199e3ca0eefea86c874e7 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_0a1819bd1ad41e57c01cde3f6ed17091 = $(`<div id="html_0a1819bd1ad41e57c01cde3f6ed17091" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 10<br>         <b>Coördinaat:</b> 52.308480, 5.979620<br>         <b>Werkblad(en):</b> Lampetra2025<br>         <b>Sample-ID's:</b> A064; A065; A066; A067; A068; A069; A070; A071; A072; A073<br>         <b>Seq_id:</b> A064; A065; A066; A067; A068; A069; A070; A071; A072; A073<br>         <b>Locatie(s):</b> Smallertse Beek<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_ae3df8bc82a199e3ca0eefea86c874e7.setContent(html_0a1819bd1ad41e57c01cde3f6ed17091);
+            
+        
+
+        circle_marker_0f7bcd3e7a33781abb5e5bb8d95b7280.bindPopup(popup_ae3df8bc82a199e3ca0eefea86c874e7)
+        ;
+
+        
+    
+    
+            circle_marker_0f7bcd3e7a33781abb5e5bb8d95b7280.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=10 | 52.30848, 5.97962
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3baca0c20886e388e806c161190c788b = L.circleMarker(
+                [52.43412, 6.92663],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_f2c2a664cb6989b9897e9f30adb95a63 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_c3d040cdb506dcdb46f9d2cdaffefd1c = $(`<div id="html_c3d040cdb506dcdb46f9d2cdaffefd1c" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 10<br>         <b>Coördinaat:</b> 52.434120, 6.926630<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> B365; B366; B367; B368; B369; B370; B371; B372; B373; B374<br>         <b>Seq_id:</b> B365; B366; B367; B368; B369; B370; B371; B372; B373; B374<br>         <b>Locatie(s):</b> Zandvangertje<br>         <b>Gemeente(n):</b> Hezingen         </div>`)[0];
+                popup_f2c2a664cb6989b9897e9f30adb95a63.setContent(html_c3d040cdb506dcdb46f9d2cdaffefd1c);
+            
+        
+
+        circle_marker_3baca0c20886e388e806c161190c788b.bindPopup(popup_f2c2a664cb6989b9897e9f30adb95a63)
+        ;
+
+        
+    
+    
+            circle_marker_3baca0c20886e388e806c161190c788b.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=10 | 52.43412, 6.92663
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1757eb99c6a2049cc073c572b4360ba0 = L.circleMarker(
+                [52.28644, 5.94396],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.799999999999999, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_2387d02fd381421127a5e61715554918 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_3c39e28bec773d6789cde2c236264d73 = $(`<div id="html_3c39e28bec773d6789cde2c236264d73" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 9<br>         <b>Coördinaat:</b> 52.286440, 5.943960<br>         <b>Werkblad(en):</b> Lampetra2025<br>         <b>Sample-ID's:</b> A084; A085; A086; A087; A088; A089; A090; A091; A092<br>         <b>Seq_id:</b> A084; A085; A086; A087; A088; A089; A090; A091; A092<br>         <b>Locatie(s):</b> Geelmolense beek<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_2387d02fd381421127a5e61715554918.setContent(html_3c39e28bec773d6789cde2c236264d73);
+            
+        
+
+        circle_marker_1757eb99c6a2049cc073c572b4360ba0.bindPopup(popup_2387d02fd381421127a5e61715554918)
+        ;
+
+        
+    
+    
+            circle_marker_1757eb99c6a2049cc073c572b4360ba0.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=9 | 52.28644, 5.94396
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1995e7cd453c18c5a2b1dcb1a3ddde09 = L.circleMarker(
+                [52.36895, 6.0368],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.799999999999999, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_e61a97aeefbf9c39171406af52d8b7e7 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_0690ec659f73cc288b6d8ee0cf0e9414 = $(`<div id="html_0690ec659f73cc288b6d8ee0cf0e9414" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 9<br>         <b>Coördinaat:</b> 52.368950, 6.036800<br>         <b>Werkblad(en):</b> Lampetra2025<br>         <b>Sample-ID's:</b> A074; A075; A076; A077; A078; A079; A080; A081; A083<br>         <b>Seq_id:</b> A074; A075; A076; A077; A078; A079; A080; A081; A083<br>         <b>Locatie(s):</b> Horsthoekerbeek (Noord)<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_e61a97aeefbf9c39171406af52d8b7e7.setContent(html_0690ec659f73cc288b6d8ee0cf0e9414);
+            
+        
+
+        circle_marker_1995e7cd453c18c5a2b1dcb1a3ddde09.bindPopup(popup_e61a97aeefbf9c39171406af52d8b7e7)
+        ;
+
+        
+    
+    
+            circle_marker_1995e7cd453c18c5a2b1dcb1a3ddde09.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=9 | 52.36895, 6.03680
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_81d94bae997d49737770c280b52d08fb = L.circleMarker(
+                [52.30837, 6.00473],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_27f0d14ee6cdfd4773d949ca9fae4359 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_415e2253c8555618528cbed9955151e1 = $(`<div id="html_415e2253c8555618528cbed9955151e1" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 7<br>         <b>Coördinaat:</b> 52.308370, 6.004730<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A233; A234; A235; A236; A237; A238; A239<br>         <b>Seq_id:</b> A233; A234; A235; A236; A237; A238; A239<br>         <b>Locatie(s):</b> Smallertse beek<br>         <b>Gemeente(n):</b> Emst         </div>`)[0];
+                popup_27f0d14ee6cdfd4773d949ca9fae4359.setContent(html_415e2253c8555618528cbed9955151e1);
+            
+        
+
+        circle_marker_81d94bae997d49737770c280b52d08fb.bindPopup(popup_27f0d14ee6cdfd4773d949ca9fae4359)
+        ;
+
+        
+    
+    
+            circle_marker_81d94bae997d49737770c280b52d08fb.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=7 | 52.30837, 6.00473
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ddad55011c5510cf1055953f9af3bd2e = L.circleMarker(
+                [52.30843, 6.00512],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.8, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_69d588da15286136209ca0d4be589237 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_e83b5ee726bf25c18b8e54f014105f4e = $(`<div id="html_e83b5ee726bf25c18b8e54f014105f4e" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 4<br>         <b>Coördinaat:</b> 52.308430, 6.005120<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A240; A241; A242; A243<br>         <b>Seq_id:</b> A240; A241; A242; A243<br>         <b>Locatie(s):</b> Grift<br>         <b>Gemeente(n):</b> Emst         </div>`)[0];
+                popup_69d588da15286136209ca0d4be589237.setContent(html_e83b5ee726bf25c18b8e54f014105f4e);
+            
+        
+
+        circle_marker_ddad55011c5510cf1055953f9af3bd2e.bindPopup(popup_69d588da15286136209ca0d4be589237)
+        ;
+
+        
+    
+    
+            circle_marker_ddad55011c5510cf1055953f9af3bd2e.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=4 | 52.30843, 6.00512
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f0f464c3004dca8f839de79878f5339a = L.circleMarker(
+                [52.43176, 6.89678],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.8, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_10c5b603766887be12ed308aaba35ed0 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_5da132f95ae7023339325d3e19a0ef56 = $(`<div id="html_5da132f95ae7023339325d3e19a0ef56" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 4<br>         <b>Coördinaat:</b> 52.431760, 6.896780<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> B355; B356; B357; B358<br>         <b>Seq_id:</b> B355; B356; B357; B358<br>         <b>Locatie(s):</b> Springendalse Beek<br>         <b>Gemeente(n):</b> Hezingen         </div>`)[0];
+                popup_10c5b603766887be12ed308aaba35ed0.setContent(html_5da132f95ae7023339325d3e19a0ef56);
+            
+        
+
+        circle_marker_f0f464c3004dca8f839de79878f5339a.bindPopup(popup_10c5b603766887be12ed308aaba35ed0)
+        ;
+
+        
+    
+    
+            circle_marker_f0f464c3004dca8f839de79878f5339a.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=4 | 52.43176, 6.89678
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b52caec0aec82e39b9f5372e61a7180e = L.circleMarker(
+                [52.43231, 6.89455],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.8, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_d15a532d062319d8a605c5a02a6d6224 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_626280c8feffa8595843804c6b9c8746 = $(`<div id="html_626280c8feffa8595843804c6b9c8746" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 4<br>         <b>Coördinaat:</b> 52.432310, 6.894550<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> B361; B362; B363; B364<br>         <b>Seq_id:</b> B361; B362; B363; B364<br>         <b>Locatie(s):</b> Springendalse Beek<br>         <b>Gemeente(n):</b> Oud Ootmarsum         </div>`)[0];
+                popup_d15a532d062319d8a605c5a02a6d6224.setContent(html_626280c8feffa8595843804c6b9c8746);
+            
+        
+
+        circle_marker_b52caec0aec82e39b9f5372e61a7180e.bindPopup(popup_d15a532d062319d8a605c5a02a6d6224)
+        ;
+
+        
+    
+    
+            circle_marker_b52caec0aec82e39b9f5372e61a7180e.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=4 | 52.43231, 6.89455
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_012e474d76575917744e6fd9d33df582 = L.circleMarker(
+                [52.43234, 6.88928],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.8, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_d77960ce7891ac3a17bff351f1148c79 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_75b7053d81556ce776eb4bd196b57ae8 = $(`<div id="html_75b7053d81556ce776eb4bd196b57ae8" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 4<br>         <b>Coördinaat:</b> 52.432340, 6.889280<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> B351; B352; B353; B354<br>         <b>Seq_id:</b> B351; B352; B353; B354<br>         <b>Locatie(s):</b> Springendalse Beek<br>         <b>Gemeente(n):</b> Hezingen         </div>`)[0];
+                popup_d77960ce7891ac3a17bff351f1148c79.setContent(html_75b7053d81556ce776eb4bd196b57ae8);
+            
+        
+
+        circle_marker_012e474d76575917744e6fd9d33df582.bindPopup(popup_d77960ce7891ac3a17bff351f1148c79)
+        ;
+
+        
+    
+    
+            circle_marker_012e474d76575917744e6fd9d33df582.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=4 | 52.43234, 6.88928
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ef683d7a8d321b6ab0beb10e60c74e7d = L.circleMarker(
+                [52.43287, 6.88744],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9.8, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_f53d87cfcc2b9fd70daf46997caea185 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_24c2c5f87bd9baf5286e9cddaf1ded0d = $(`<div id="html_24c2c5f87bd9baf5286e9cddaf1ded0d" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 4<br>         <b>Coördinaat:</b> 52.432870, 6.887440<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A395; A396; A397; A398<br>         <b>Seq_id:</b> A395; A396; A397; A398<br>         <b>Locatie(s):</b> Springendalse Beek<br>         <b>Gemeente(n):</b> Hezingen         </div>`)[0];
+                popup_f53d87cfcc2b9fd70daf46997caea185.setContent(html_24c2c5f87bd9baf5286e9cddaf1ded0d);
+            
+        
+
+        circle_marker_ef683d7a8d321b6ab0beb10e60c74e7d.bindPopup(popup_f53d87cfcc2b9fd70daf46997caea185)
+        ;
+
+        
+    
+    
+            circle_marker_ef683d7a8d321b6ab0beb10e60c74e7d.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=4 | 52.43287, 6.88744
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e6fb9731ec7875dbb40e15c90d55df7a = L.circleMarker(
+                [52.30843, 6.00505],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.6, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_8ebb8a0079ada95140b513023598bcfa = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_06b3631aa21513c388f3dc8b7bc984af = $(`<div id="html_06b3631aa21513c388f3dc8b7bc984af" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 3<br>         <b>Coördinaat:</b> 52.308430, 6.005050<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A244; A245; A246<br>         <b>Seq_id:</b> A244; A245; A246<br>         <b>Locatie(s):</b> Grift<br>         <b>Gemeente(n):</b> Emst         </div>`)[0];
+                popup_8ebb8a0079ada95140b513023598bcfa.setContent(html_06b3631aa21513c388f3dc8b7bc984af);
+            
+        
+
+        circle_marker_e6fb9731ec7875dbb40e15c90d55df7a.bindPopup(popup_8ebb8a0079ada95140b513023598bcfa)
+        ;
+
+        
+    
+    
+            circle_marker_e6fb9731ec7875dbb40e15c90d55df7a.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=3 | 52.30843, 6.00505
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_27d1593a89399b3654b4b0803d4d7664 = L.circleMarker(
+                [52.43192, 6.89505],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_80ec0d830a36c71428bb11fb4dd085e9 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_fb29f4bd9387f762f41bff6b5b8326b2 = $(`<div id="html_fb29f4bd9387f762f41bff6b5b8326b2" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 2<br>         <b>Coördinaat:</b> 52.431920, 6.895050<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> B359; B360<br>         <b>Seq_id:</b> B359; B360<br>         <b>Locatie(s):</b> Springendalse Beek<br>         <b>Gemeente(n):</b> Oud Ootmarsum         </div>`)[0];
+                popup_80ec0d830a36c71428bb11fb4dd085e9.setContent(html_fb29f4bd9387f762f41bff6b5b8326b2);
+            
+        
+
+        circle_marker_27d1593a89399b3654b4b0803d4d7664.bindPopup(popup_80ec0d830a36c71428bb11fb4dd085e9)
+        ;
+
+        
+    
+    
+            circle_marker_27d1593a89399b3654b4b0803d4d7664.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=2 | 52.43192, 6.89505
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cea09fa0f14c97992bc536993090e0be = L.circleMarker(
+                [52.43257, 6.88854],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_d98d633466b9f5982e16fad3d1816a04 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_670324e50a4e0c39ad98c0ba1ac293b6 = $(`<div id="html_670324e50a4e0c39ad98c0ba1ac293b6" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 2<br>         <b>Coördinaat:</b> 52.432570, 6.888540<br>         <b>Werkblad(en):</b> Lampetra2026<br>         <b>Sample-ID's:</b> A399; A400<br>         <b>Seq_id:</b> A399; A400<br>         <b>Locatie(s):</b> Springendalse Beek<br>         <b>Gemeente(n):</b> Hezingen         </div>`)[0];
+                popup_d98d633466b9f5982e16fad3d1816a04.setContent(html_670324e50a4e0c39ad98c0ba1ac293b6);
+            
+        
+
+        circle_marker_cea09fa0f14c97992bc536993090e0be.bindPopup(popup_d98d633466b9f5982e16fad3d1816a04)
+        ;
+
+        
+    
+    
+            circle_marker_cea09fa0f14c97992bc536993090e0be.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=2 | 52.43257, 6.88854
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_91078af6cd9a415e5317844df0c5c1c2 = L.circleMarker(
+                [52.28407, 5.91759],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d73027", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.2, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bb33df4a70f5549570741c1459bc0272);
+        
+    
+        var popup_a4dc32097c38c1b7370c3f5a6c2f96d4 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_ad76e79be644a50b8485fde16ae5f263 = $(`<div id="html_ad76e79be644a50b8485fde16ae5f263" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Lampetra planeri</i><br>         <b>n:</b> 1<br>         <b>Coördinaat:</b> 52.284070, 5.917590<br>         <b>Werkblad(en):</b> Lampetra2025<br>         <b>Sample-ID's:</b> A063<br>         <b>Seq_id:</b> A063<br>         <b>Locatie(s):</b> Geelmolense beek<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_a4dc32097c38c1b7370c3f5a6c2f96d4.setContent(html_ad76e79be644a50b8485fde16ae5f263);
+            
+        
+
+        circle_marker_91078af6cd9a415e5317844df0c5c1c2.bindPopup(popup_a4dc32097c38c1b7370c3f5a6c2f96d4)
+        ;
+
+        
+    
+    
+            circle_marker_91078af6cd9a415e5317844df0c5c1c2.bindTooltip(
+                `<div>
+                     Beekprik (Lampetra planeri) | n=1 | 52.28407, 5.91759
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_bb33df4a70f5549570741c1459bc0272.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            var feature_group_c09908ecf307629023bbd429d4816e8e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_cc3d536404a047bebf445f2e45b687d5 = L.circleMarker(
+                [52.99541, 6.83487],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d39b00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c09908ecf307629023bbd429d4816e8e);
+        
+    
+        var popup_fb7669224d21cc353984252da05f60d9 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_a1ced8c56211ba584c0902438534be64 = $(`<div id="html_a1ced8c56211ba584c0902438534be64" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Leuciscus leuciscus</i><br>         <b>n:</b> 29<br>         <b>Coördinaat:</b> 52.995410, 6.834870<br>         <b>Werkblad(en):</b> Serpeling<br>         <b>Sample-ID's:</b> A916; A917; A918; A919; A920; A921; A922; A923; A924; A925; A926; A927; A928; A929; A930; A931; A932; A933; A934; A935; A936; A937; A938; A939; F2026E10071; F2026E10072; F2026E10073; F2026E10077; F2026E10078<br>         <b>Seq_id:</b> A916_Lleu_P; A917_Lleu_P; A918_Lleu_P; A919_Lleu_P; A920_Lleu_P; A921_Lleu_P; A922_Lleu_P; A923_Lleu_P; A924_Lleu_P; A925_Lleu_P; A926_Lleu_P; A927_Lleu_P; A928; A929; A930; A931; A932; A933; A934; A935; A936; A937; A938; A939; F2026E10071; F2026E10072; F2026E10073; F2026E10077; F2026E10078<br>         <b>Locatie(s):</b> -<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_fb7669224d21cc353984252da05f60d9.setContent(html_a1ced8c56211ba584c0902438534be64);
+            
+        
+
+        circle_marker_cc3d536404a047bebf445f2e45b687d5.bindPopup(popup_fb7669224d21cc353984252da05f60d9)
+        ;
+
+        
+    
+    
+            circle_marker_cc3d536404a047bebf445f2e45b687d5.bindTooltip(
+                `<div>
+                     Serpeling (Leuciscus leuciscus) | n=29 | 52.99541, 6.83487
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c51caed330718c0cceea13e1de67883d = L.circleMarker(
+                [52.94177, 7.13318],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d39b00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c09908ecf307629023bbd429d4816e8e);
+        
+    
+        var popup_01b60595588f338905249979405e60f2 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_ba58d0a9f19946cb3a4f9a04fa52f701 = $(`<div id="html_ba58d0a9f19946cb3a4f9a04fa52f701" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Leuciscus leuciscus</i><br>         <b>n:</b> 25<br>         <b>Coördinaat:</b> 52.941770, 7.133180<br>         <b>Werkblad(en):</b> Serpeling<br>         <b>Sample-ID's:</b> A901; A902; A904; A905; A906; A907; A908; A909; A910; A911; A913; A914; A915; A940; A941; A942; A943; A944; A945; A946; A947; A948; A949; A950; A951<br>         <b>Seq_id:</b> A901V6; A902V6; A904V6; A905V6; A906V7; A907V7; A908V7; A909V7; A910; A911V8; A913V8; A914V8; A915V8; A940; A941; A942; A943; A944; A945; A946; A947; A948; A949; A950; A951<br>         <b>Locatie(s):</b> -<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_01b60595588f338905249979405e60f2.setContent(html_ba58d0a9f19946cb3a4f9a04fa52f701);
+            
+        
+
+        circle_marker_c51caed330718c0cceea13e1de67883d.bindPopup(popup_01b60595588f338905249979405e60f2)
+        ;
+
+        
+    
+    
+            circle_marker_c51caed330718c0cceea13e1de67883d.bindTooltip(
+                `<div>
+                     Serpeling (Leuciscus leuciscus) | n=25 | 52.94177, 7.13318
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3dd0f4ae9848847633ef9431ec4afc69 = L.circleMarker(
+                [51.94396, 6.77017],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d39b00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c09908ecf307629023bbd429d4816e8e);
+        
+    
+        var popup_1328a4c698b4a5d34744d0b6c637915d = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_a2acaea4910403ff5526d6829aad4951 = $(`<div id="html_a2acaea4910403ff5526d6829aad4951" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Leuciscus leuciscus</i><br>         <b>n:</b> 15<br>         <b>Coördinaat:</b> 51.943960, 6.770170<br>         <b>Werkblad(en):</b> Serpeling<br>         <b>Sample-ID's:</b> A370; A371; A372; A373; A374; A375; A376; A377; A378; A379; A380; A381; A382; A383; A384<br>         <b>Seq_id:</b> A370; A371; A372; A373; A374; A375; A376; A377; A378; A379; A380; A381; A382; A383; A384<br>         <b>Locatie(s):</b> Bemersbeek<br>         <b>Gemeente(n):</b> Kotten         </div>`)[0];
+                popup_1328a4c698b4a5d34744d0b6c637915d.setContent(html_a2acaea4910403ff5526d6829aad4951);
+            
+        
+
+        circle_marker_3dd0f4ae9848847633ef9431ec4afc69.bindPopup(popup_1328a4c698b4a5d34744d0b6c637915d)
+        ;
+
+        
+    
+    
+            circle_marker_3dd0f4ae9848847633ef9431ec4afc69.bindTooltip(
+                `<div>
+                     Serpeling (Leuciscus leuciscus) | n=15 | 51.94396, 6.77017
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_26a86f2248d13451c1f5f77ca4ee5495 = L.circleMarker(
+                [51.24498, 5.02459],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d39b00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c09908ecf307629023bbd429d4816e8e);
+        
+    
+        var popup_d2d84b9199d3abe7605bb2543951ed5c = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_e2d6309bacc4d458a3d64b0f3d85953d = $(`<div id="html_e2d6309bacc4d458a3d64b0f3d85953d" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Leuciscus leuciscus</i><br>         <b>n:</b> 7<br>         <b>Coördinaat:</b> 51.244980, 5.024590<br>         <b>Werkblad(en):</b> Serpeling<br>         <b>Sample-ID's:</b> F2026E10051; F2026E10052; F2026E10053; F2026E10054; F2026E10055; F2026E10056; F2026E10057<br>         <b>Seq_id:</b> F2026E10051; F2026E10052; F2026E10053; F2026E10054; F2026E10055; F2026E10056; F2026E10057<br>         <b>Locatie(s):</b> -<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_d2d84b9199d3abe7605bb2543951ed5c.setContent(html_e2d6309bacc4d458a3d64b0f3d85953d);
+            
+        
+
+        circle_marker_26a86f2248d13451c1f5f77ca4ee5495.bindPopup(popup_d2d84b9199d3abe7605bb2543951ed5c)
+        ;
+
+        
+    
+    
+            circle_marker_26a86f2248d13451c1f5f77ca4ee5495.bindTooltip(
+                `<div>
+                     Serpeling (Leuciscus leuciscus) | n=7 | 51.24498, 5.02459
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c2528c6e4b2a81af1a055a645775612e = L.circleMarker(
+                [51.28702, 5.49311],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#d39b00", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c09908ecf307629023bbd429d4816e8e);
+        
+    
+        var popup_07bfa9a93d990484e5a0a121bd07440e = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_a511a321675e3a3cdbe06a9abeceefbf = $(`<div id="html_a511a321675e3a3cdbe06a9abeceefbf" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Leuciscus leuciscus</i><br>         <b>n:</b> 5<br>         <b>Coördinaat:</b> 51.287020, 5.493110<br>         <b>Werkblad(en):</b> Serpeling<br>         <b>Sample-ID's:</b> Ll001; Ll002; Ll003; Ll004; Ll005<br>         <b>Seq_id:</b> Ll001; Ll002; Ll003; Ll004; Ll005<br>         <b>Locatie(s):</b> -<br>         <b>Gemeente(n):</b> -         </div>`)[0];
+                popup_07bfa9a93d990484e5a0a121bd07440e.setContent(html_a511a321675e3a3cdbe06a9abeceefbf);
+            
+        
+
+        circle_marker_c2528c6e4b2a81af1a055a645775612e.bindPopup(popup_07bfa9a93d990484e5a0a121bd07440e)
+        ;
+
+        
+    
+    
+            circle_marker_c2528c6e4b2a81af1a055a645775612e.bindTooltip(
+                `<div>
+                     Serpeling (Leuciscus leuciscus) | n=5 | 51.28702, 5.49311
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_c09908ecf307629023bbd429d4816e8e.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            var feature_group_6cd3fcd6acd711bc027ccd3b49d5309f = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_00e92a9fe2c7851c6a064d023c9c5b0a = L.circleMarker(
+                [52.00675, 6.66995],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca25f", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_6cd3fcd6acd711bc027ccd3b49d5309f);
+        
+    
+        var popup_1ba3d0e25ccea8133b43c78510c355ba = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_0820dcc7a055ea5ce395d760abb40299 = $(`<div id="html_0820dcc7a055ea5ce395d760abb40299" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Cottus perifretum</i><br>         <b>n:</b> 15<br>         <b>Coördinaat:</b> 52.006750, 6.669950<br>         <b>Werkblad(en):</b> Donderpadden<br>         <b>Sample-ID's:</b> A293; A294; A295; A296; A297; A298; S081; S082; S083; S084; S085; S086; S087; S116; S117<br>         <b>Seq_id:</b> A293; A294; A295; A296; A297; A298; S081; S082; S083; S084; S085; S086; S087; S116; S117<br>         <b>Locatie(s):</b> Bypass Groenlose Slinge<br>         <b>Gemeente(n):</b> Winterswijk         </div>`)[0];
+                popup_1ba3d0e25ccea8133b43c78510c355ba.setContent(html_0820dcc7a055ea5ce395d760abb40299);
+            
+        
+
+        circle_marker_00e92a9fe2c7851c6a064d023c9c5b0a.bindPopup(popup_1ba3d0e25ccea8133b43c78510c355ba)
+        ;
+
+        
+    
+    
+            circle_marker_00e92a9fe2c7851c6a064d023c9c5b0a.bindTooltip(
+                `<div>
+                     Donderpad (Cottus perifretum) | n=15 | 52.00675, 6.66995
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_26dde989112b654ab10936a180de428b = L.circleMarker(
+                [51.52858, 4.82943],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca25f", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 19.4, "stroke": true, "weight": 1}
+            ).addTo(feature_group_6cd3fcd6acd711bc027ccd3b49d5309f);
+        
+    
+        var popup_42135f3172cc80e937336539b5baa54d = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_f2125d03ed46f98bc70e6e858c75ba6e = $(`<div id="html_f2125d03ed46f98bc70e6e858c75ba6e" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Cottus perifretum</i><br>         <b>n:</b> 13<br>         <b>Coördinaat:</b> 51.528580, 4.829430<br>         <b>Werkblad(en):</b> Donderpadden<br>         <b>Sample-ID's:</b> A201; A202; A203; A204; A205; A206; A214; A215; A216; A217; A218; A219; A220<br>         <b>Seq_id:</b> A201; A202; A203; A204; A205; A206; A214; A215; A216; A217; A218; A219; A220<br>         <b>Locatie(s):</b> Chaamse beek<br>         <b>Gemeente(n):</b> Gilze         </div>`)[0];
+                popup_42135f3172cc80e937336539b5baa54d.setContent(html_f2125d03ed46f98bc70e6e858c75ba6e);
+            
+        
+
+        circle_marker_26dde989112b654ab10936a180de428b.bindPopup(popup_42135f3172cc80e937336539b5baa54d)
+        ;
+
+        
+    
+    
+            circle_marker_26dde989112b654ab10936a180de428b.bindTooltip(
+                `<div>
+                     Donderpad (Cottus perifretum) | n=13 | 51.52858, 4.82943
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_08ac232894f2e0a99b7f05f6c64ce3c4 = L.circleMarker(
+                [51.54216, 4.79916],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca25f", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12.2, "stroke": true, "weight": 1}
+            ).addTo(feature_group_6cd3fcd6acd711bc027ccd3b49d5309f);
+        
+    
+        var popup_e8ad26a0f8e2f962d47224692af4d5e7 = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_27b2b4dacb6a00db8b64867068bc0c05 = $(`<div id="html_27b2b4dacb6a00db8b64867068bc0c05" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Cottus perifretum</i><br>         <b>n:</b> 6<br>         <b>Coördinaat:</b> 51.542160, 4.799160<br>         <b>Werkblad(en):</b> Donderpadden<br>         <b>Sample-ID's:</b> A207; A208; A209; A210; A211; A212<br>         <b>Seq_id:</b> A207; A208; A209; A210; A211; A212<br>         <b>Locatie(s):</b> Chaamse beek<br>         <b>Gemeente(n):</b> Ulvenhout         </div>`)[0];
+                popup_e8ad26a0f8e2f962d47224692af4d5e7.setContent(html_27b2b4dacb6a00db8b64867068bc0c05);
+            
+        
+
+        circle_marker_08ac232894f2e0a99b7f05f6c64ce3c4.bindPopup(popup_e8ad26a0f8e2f962d47224692af4d5e7)
+        ;
+
+        
+    
+    
+            circle_marker_08ac232894f2e0a99b7f05f6c64ce3c4.bindTooltip(
+                `<div>
+                     Donderpad (Cottus perifretum) | n=6 | 51.54216, 4.79916
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2a228669e7a55b9ba4962ae36018a8ef = L.circleMarker(
+                [51.55991, 4.78786],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2ca25f", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6.2, "stroke": true, "weight": 1}
+            ).addTo(feature_group_6cd3fcd6acd711bc027ccd3b49d5309f);
+        
+    
+        var popup_764b5eca926d277247df2cad4954297c = L.popup({
+  "maxWidth": 420,
+});
+
+        
+            
+                var html_5a8ad3a36fcd7749790a0a087c408229 = $(`<div id="html_5a8ad3a36fcd7749790a0a087c408229" style="width: 100.0%; height: 100.0%;">         <b>Soort:</b> <i>Cottus perifretum</i><br>         <b>n:</b> 1<br>         <b>Coördinaat:</b> 51.559910, 4.787860<br>         <b>Werkblad(en):</b> Donderpadden<br>         <b>Sample-ID's:</b> A213<br>         <b>Seq_id:</b> A213<br>         <b>Locatie(s):</b> Bavelse Leij<br>         <b>Gemeente(n):</b> Breda         </div>`)[0];
+                popup_764b5eca926d277247df2cad4954297c.setContent(html_5a8ad3a36fcd7749790a0a087c408229);
+            
+        
+
+        circle_marker_2a228669e7a55b9ba4962ae36018a8ef.bindPopup(popup_764b5eca926d277247df2cad4954297c)
+        ;
+
+        
+    
+    
+            circle_marker_2a228669e7a55b9ba4962ae36018a8ef.bindTooltip(
+                `<div>
+                     Donderpad (Cottus perifretum) | n=1 | 51.55991, 4.78786
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_6cd3fcd6acd711bc027ccd3b49d5309f.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            map_a369da833bac8ddaa168f04813ad2f6b.fitBounds(
+                [[51.24498, 4.78786], [60.553241, 26.850269]],
+                {"padding": [20, 20]}
+            );
+        
+    
+            var layer_control_66be9db9b01f9eadccdfe98b551ce5fc_layers = {
+                base_layers : {
+                },
+                overlays :  {
+                    "Rivierprik (Lampetra fluviatilis)" : feature_group_283debe7cad707008c8f6893a16d2fec,
+                    "Beekprik (Lampetra planeri)" : feature_group_bb33df4a70f5549570741c1459bc0272,
+                    "Serpeling (Leuciscus leuciscus)" : feature_group_c09908ecf307629023bbd429d4816e8e,
+                    "Donderpad (Cottus perifretum)" : feature_group_6cd3fcd6acd711bc027ccd3b49d5309f,
+                },
+            };
+            let layer_control_66be9db9b01f9eadccdfe98b551ce5fc = L.control.layers(
+                layer_control_66be9db9b01f9eadccdfe98b551ce5fc_layers.base_layers,
+                layer_control_66be9db9b01f9eadccdfe98b551ce5fc_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+
+        
+    
+            tile_layer_c1e47d5ccc9d8852b51543fcdb457f9b.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            feature_group_283debe7cad707008c8f6893a16d2fec.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            feature_group_bb33df4a70f5549570741c1459bc0272.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            feature_group_c09908ecf307629023bbd429d4816e8e.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+    
+            feature_group_6cd3fcd6acd711bc027ccd3b49d5309f.addTo(map_a369da833bac8ddaa168f04813ad2f6b);
+        
+</script>
+</html>
